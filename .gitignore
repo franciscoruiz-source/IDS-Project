@@ -1,0 +1,21 @@
+# Data files (can be large)
+data/raw/*.csv
+data/raw/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model binary (regenerate from notebook)
+app/model.pkl
+
+# OS
+.DS_Store
+Thumbs.db
