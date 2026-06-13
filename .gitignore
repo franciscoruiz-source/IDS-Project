@@ -10,11 +10,7 @@ __pycache__/
 venv/
 .venv/
 
-# Jupyter
-.ipynb_checkpoints/
 
-# Model binary (regenerate from notebook)
-app/model.pkl
 
 # OS
 .DS_Store

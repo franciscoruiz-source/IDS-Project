@@ -22,7 +22,7 @@ docker-compose up
 
 Test the endpoint:
 ```bash
-curl -X POST http://localhost:8000/predict \
+curl -X POST http://localhost:8000/docs \
   -H "Content-Type: application/json" \
   -d '{
   "days_inactive": 700,
