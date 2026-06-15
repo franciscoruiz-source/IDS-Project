@@ -78,8 +78,8 @@ def root():
         "endpoints": {
             "health": "GET  /health",
             "predict": "POST /predict",
-            "features": "GET  /features",
             "docs": "GET  /docs"
+
         },
         "usage": "Visit /docs to test the prediction endpoint interactively"
     }
