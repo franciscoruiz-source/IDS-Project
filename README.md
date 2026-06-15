@@ -25,7 +25,6 @@ Test the endpoint:
 curl -X POST http://localhost:8000/docs \
   -H "Content-Type: application/json" \
   -d '{
-  "days_inactive": 700,
   "follower_ratio": 0.01,
   "repos_per_year": 0.0,
   "account_age_years": 8.0,
@@ -80,14 +79,13 @@ Fetches public user profiles including repository count, follower/following coun
 
 | Feature | Type | Reasoning |
 |---|---|---|
-| `days_inactive` | Time-based | Primary recency signal — strongest churn predictor |
 | `account_age_years` | Time-based | Provides context for other features |
 | `follower_ratio` | Ratio | `followers / (following+1)` — social engagement quality |
 | `repos_per_year` | Ratio | Productivity normalized by account age |
-| `total_public_contributions` | Aggregation | Overall volume (repos + gists) |
+| `total_public_contributions` | Aggregation | Overall volume of public work (repos + gists) |
 | `social_size` | Aggregation | Total network connections |
 | `has_no_repos` | Binary | Zero repos = qualitatively different risk group |
-| `has_no_followers` | Binary | Socially isolated users disengage more |
+| `has_no_followers` | Binary | Socially isolated users have higher churn risk
 
 ---
 
@@ -102,8 +100,8 @@ Run `notebooks/eda_and_selection.ipynb` to see the full comparison table.
 | Decision Tree | Single tree Gini importance — interpretable but noisy | Fast |
 | Random Forest | Averages importance across 100 trees — most stable | Medium |
 
-**Selected features (top 5 across all methods):**
-`days_inactive`, `follower_ratio`, `repos_per_year`, `account_age_years`, `has_no_repos`
+**Selected features (top 4 across all methods):**
+`follower_ratio`, `repos_per_year`, `account_age_years`, `has_no_repos`
 
 ---
 

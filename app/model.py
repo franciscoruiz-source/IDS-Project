@@ -13,7 +13,6 @@ MODEL_PATH = "model.pkl"
 # These are the features selected after running all 4 selection methods
 # (see notebook for full analysis — these ranked highly across all methods)
 SELECTED_FEATURES = [
-    "days_inactive",
     "follower_ratio",
     "repos_per_year",
     "account_age_years",

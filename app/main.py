@@ -6,7 +6,6 @@ import os
 
 # Feature names must match what the model was trained on
 SELECTED_FEATURES = [
-    "days_inactive",
     "follower_ratio",
     "repos_per_year",
     "account_age_years",
@@ -36,7 +35,6 @@ def load_model():
 
 # --- Input schema (Pydantic validates types automatically) ---
 class UserFeatures(BaseModel):
-    days_inactive: float        # Days since last GitHub activity
     follower_ratio: float       # followers / (following + 1)
     repos_per_year: float       # public_repos / account_age_years
     account_age_years: float    # How long the account has existed
@@ -45,7 +43,6 @@ class UserFeatures(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "days_inactive": 200,
                 "follower_ratio": 0.3,
                 "repos_per_year": 1.2,
                 "account_age_years": 4.5,
@@ -67,7 +64,6 @@ def list_features():
     """Returns the list of required input features and their descriptions."""
     return {
         "features": [
-            {"name": "days_inactive",      "type": "float", "description": "Days since last GitHub activity (updated_at)"},
             {"name": "follower_ratio",     "type": "float", "description": "followers / (following + 1) — social engagement signal"},
             {"name": "repos_per_year",     "type": "float", "description": "public_repos / account_age_years — productivity rate"},
             {"name": "account_age_years",  "type": "float", "description": "Account age in years since creation"},
@@ -101,7 +97,6 @@ def predict_churn(user: UserFeatures):
         )
 
     features = np.array([[
-        user.days_inactive,
         user.follower_ratio,
         user.repos_per_year,
         user.account_age_years,

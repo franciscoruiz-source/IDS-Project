@@ -23,13 +23,9 @@ def generate_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # -------------------------------------------------------
     # TIME-BASED FEATURES
-    # Recency is the strongest churn signal in most domains.
+    # Account age is used, but days inactive is reserved for churn labeling only.
     # -------------------------------------------------------
 
-    # Time-based #1: How many days since last activity?
-    df["days_inactive"] = (now - df["updated_at"]).dt.days
-
-    # Time-based #2: How old is the account (in years)?
     df["account_age_years"] = (
         (now - df["created_at"]).dt.days / 365.25
     ).clip(lower=0.01)  # Avoid division by zero
@@ -70,7 +66,6 @@ def generate_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # Select only the generated feature columns (not raw fields)
     feature_cols = [
-        "days_inactive",
         "account_age_years",
         "follower_ratio",
         "repos_per_year",
@@ -90,7 +85,6 @@ def generate_features(df: pd.DataFrame) -> pd.DataFrame:
 def get_feature_names() -> list:
     """Return the list of feature names used by the model (no label)."""
     return [
-        "days_inactive",
         "account_age_years",
         "follower_ratio",
         "repos_per_year",
