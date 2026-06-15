@@ -75,7 +75,18 @@ def list_features():
         ]
     }
 
-
+@app.get("/")
+def root():
+    return {
+        "message": "Customer Churn Predictor API - Introduction to Data Science",
+        "endpoints": {
+            "health": "GET  /health",
+            "predict": "POST /predict",
+            "features": "GET  /features",
+            "docs": "GET  /docs"
+        },
+        "usage": "Visit /docs to test the prediction endpoint interactively"
+    }
 @app.post("/predict")
 def predict_churn(user: UserFeatures):
     """
