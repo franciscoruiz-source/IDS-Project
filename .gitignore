@@ -1,6 +1,4 @@
-# Data files (can be large)
-data/raw/*.csv
-data/raw/*.json
+
 
 # Python
 __pycache__/
